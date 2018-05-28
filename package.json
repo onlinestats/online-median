@@ -1,0 +1,26 @@
+{
+  "name": "online-median",
+  "version": "1.0.0",
+  "description": "Heap-based online algorithm for median calculation",
+  "main": "index.js",
+  "dependencies": {
+    "heap": "^0.2.6"
+  },
+  "devDependencies": {
+    "tape": "^4.9.0",
+    "faucet": "^0.0.1"
+  },
+  "scripts": {
+    "test": "tape test.js | faucet"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onlinestats/online-median.git"
+  },
+  "author": "Anton Zemlyansky",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/onlinestats/online-median/issues"
+  },
+  "homepage": "https://github.com/onlinestats/online-median#readme"
+}
