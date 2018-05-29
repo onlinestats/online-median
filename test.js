@@ -9,3 +9,10 @@ test('Simple test with NaN and Strings', (_) => {
   _.equal(median(), 6.5)
   _.end()
 })
+
+test('Only one value', (_) => {
+  var median = Median()
+  median(5)
+  _.equal(median(), 5)
+  _.end()
+})

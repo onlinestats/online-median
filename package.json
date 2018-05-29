@@ -1,6 +1,6 @@
 {
   "name": "online-median",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Heap-based online algorithm for median calculation",
   "main": "index.js",
   "dependencies": {
