@@ -11,7 +11,8 @@ function average (a, b) {
 
 module.exports = function () {
   // Initial median value
-  var m = 0
+  var value = 0
+  var n = 0
 
   // Right, Min heap
   var rHeap = new Heap(function (a, b) {
@@ -23,15 +24,17 @@ module.exports = function () {
     return b - a
   })
 
-  return function (input) {
-    if (!isNaN(input)) {
-      var x = (typeof input === 'number') ? input : parseFloat(input)
+  var median = function median (x) {
+    if (!isNaN(x)) {
+      if (typeof x !== 'number') {
+        x = parseFloat(x)
+      }
+      n += 1
       var sig = signum(lHeap.size(), rHeap.size())
       switch (sig) {
         // Left heap size > Right heap
         case 1:
-          console.log('Case 1')
-          if (x < m) {
+          if (x < value) {
             // Target: left heap
             rHeap.push(lHeap.pop())
             lHeap.push(x)
@@ -40,24 +43,24 @@ module.exports = function () {
             rHeap.push(x)
           }
           // Heaps are balanced
-          m = average(lHeap.top(), rHeap.top())
+          value = average(lHeap.top(), rHeap.top())
           break
         // Same number of elements
         case 0:
-          if (x < m) {
+          if (x < value) {
             // Target: left heap
             lHeap.push(x)
             // Left heap is bigger now. Middle-point is top of the left heap
-            m = lHeap.top()
+            value = lHeap.top()
           } else {
             // Target: right heap
             rHeap.push(x)
-            m = rHeap.top()
+            value = rHeap.top()
           }
           break
         // Left heap size < Right heap
         case -1:
-          if (x < m) {
+          if (x < value) {
             // Target: left heap
             lHeap.push(x)
           } else {
@@ -65,10 +68,30 @@ module.exports = function () {
             rHeap.push(x)
           }
           // Heaps are balanced
-          m = average(lHeap.top(), rHeap.top())
+          value = average(lHeap.top(), rHeap.top())
           break
       } // *switch
-    } // *if !NaN
-    return m
+    } else if (Array.isArray(x)) {
+      x.forEach(el => median(el))
+    }
+    return value
   }
+
+  median.fit = function (x) {
+    median(x)
+  }
+
+  Object.defineProperty(median, 'value', {
+    get: function () {
+      return value
+    }
+  })
+
+  Object.defineProperty(median, 'n', {
+    get: function () {
+      return n
+    }
+  })
+
+  return median
 }

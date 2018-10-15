@@ -7,6 +7,8 @@ test('Simple test with NaN and Strings', (_) => {
     median(v)
   })
   _.equal(median(), 6.5)
+  _.equal(median.value, 6.5)
+  _.equal(median.n, 12)
   _.end()
 })
 
@@ -14,5 +16,13 @@ test('Only one value', (_) => {
   var median = Median()
   median(5)
   _.equal(median(), 5)
+  _.end()
+})
+
+test('Array', (_) => {
+  var median = Median()
+  median([83, 7, 18, 2, 9])
+  _.equal(median.value, 9)
+  _.equal(median.n, 5)
   _.end()
 })
